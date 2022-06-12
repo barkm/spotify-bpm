@@ -1,0 +1,30 @@
+{
+  "name": "spotify-bpm",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://barkm.github.io/spotify-bpm",
+  "scripts": {
+    "dev": "webpack serve --config ./bundler/webpack.dev.js --open",
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "css-loader": "^6.7.1"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "*",
+    "html-webpack-plugin": "^5.3.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "mini-css-extract-plugin": "^1.5.0",
+    "prettier": "^2.2.1",
+    "ts-loader": "^9.1.1",
+    "typescript": "^4.2.4",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^4.9.2"
+  }
+}

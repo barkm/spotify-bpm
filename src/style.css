@@ -1,0 +1,35 @@
+* {
+  text-align: center;
+  background-color: #fff9e0;
+  color: #24160b;
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#tempo-value {
+  font-family: Baskerville;
+  font-size: 20em;
+}
+
+#tempo-unit {
+  font-family: Baskerville;
+  font-size: 3em;
+}
+
+#song {
+  font-family: Baskerville-italic;
+  font-size: 4em;
+}
+
+#artists {
+  font-family: Baskerville-italic;
+  font-size: 3em;
+  opacity: 75%;
+}

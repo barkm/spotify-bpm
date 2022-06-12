@@ -1,0 +1,17 @@
+name: deploy
+on: workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: prod
+          folder: build
