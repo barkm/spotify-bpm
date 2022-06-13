@@ -9,10 +9,11 @@ module.exports = merge(commonWebpackConfiguration, {
     host: "0.0.0.0",
     open: true,
     static: path.join(__dirname, "dist"),
+    https: true,
   },
   plugins: [
     new webpack.DefinePlugin({
-      REDIRECT_URI: JSON.stringify("http://0.0.0.0:8080/"),
+      REDIRECT_URI: JSON.stringify("https://0.0.0.0:8080/"),
     }),
   ],
 });

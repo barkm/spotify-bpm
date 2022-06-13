@@ -1,5 +1,5 @@
 import "./style.css";
-import { authorize, getAccesTokenFromURL } from "./authorization";
+import { authorize } from "./authorization";
 import { generateURLWithSearchParams } from "./url";
 
 async function makeSpotifyApiRequest(
@@ -91,6 +91,7 @@ function update(access_token: string): void {
 }
 
 function startIntervalWithPause(func: () => any, time_ms: number): void {
+  func();
   let interval = setInterval(func, time_ms);
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) {
@@ -101,13 +102,18 @@ function startIntervalWithPause(func: () => any, time_ms: number): void {
   });
 }
 
+function signOut() {
+  localStorage.clear();
+  location.reload();
+}
+
 function main() {
-  const access_token = getAccesTokenFromURL();
-  if (!access_token) {
-    authorize();
-    return;
-  }
-  startIntervalWithPause(() => update(access_token), 1000);
+  authorize()?.then((access_token) => {
+    if (access_token) {
+      startIntervalWithPause(() => update(access_token), 1000);
+    }
+  });
+  document.getElementById("sign-out")!.onclick = signOut;
 }
 
 main();
