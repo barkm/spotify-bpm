@@ -63,19 +63,19 @@ async function getCurrentlyPlayingTrack(
 }
 
 function updateHTML(track: Track | null): void {
-  if (!track) {
-    document.getElementById("tempo-value")!.innerHTML = "";
-    document.getElementById("tempo-unit")!.innerHTML = "";
-    document.getElementById("song")!.innerHTML = "No track is playing";
-    document.getElementById("artists")!.innerHTML = "";
-    return;
+  const container = document.getElementById("container")!;
+  if (track) {
+    container.innerHTML = `
+      <div id="tempo">
+        <span id="tempo-value">${Math.round(track.tempo)}</span>
+        <span id="tempo-unit">BPM</span>
+      </div>
+      <div id="song">${track.name}</div>
+      <div id="artists">${track.artists.join(", ")}</div>
+    `;
+  } else {
+    container.innerHTML = `<div id="song">No track is playing</div>`;
   }
-  document.getElementById("tempo-value")!.innerHTML = Math.floor(
-    track.tempo
-  ).toString();
-  document.getElementById("tempo-unit")!.innerHTML = "BPM";
-  document.getElementById("song")!.innerHTML = track.name;
-  document.getElementById("artists")!.innerHTML = track.artists.join(", ");
 }
 
 function update(access_token: string): void {
