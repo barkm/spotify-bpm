@@ -13,6 +13,16 @@
   flex-direction: column;
 }
 
+#sign-out {
+  font-family: Baskerville;
+  font-size: 2em;
+  border: none;
+}
+
+#sign-out:hover {
+  opacity: 75%;
+}
+
 #tempo-value {
   font-family: Baskerville;
   font-size: 20em;
