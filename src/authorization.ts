@@ -1,3 +1,5 @@
+import { generateURLWithSearchParams } from "./url";
+
 const CLIENT_ID = "41c67233bcd94457a9d0cecaf0e36aae";
 declare var REDIRECT_URI: string;
 
@@ -22,16 +24,17 @@ export function getAccesTokenFromURL(): string | undefined {
 
 export function authorize() {
   let state = generateRandomString(16);
-  const params = new URLSearchParams();
-  params.append("client_id", CLIENT_ID);
-  params.append("scope", "user-read-currently-playing");
-  params.append("show_dialog", "true");
-  params.append("redirect_uri", REDIRECT_URI);
-  params.append("response_type", "token");
-  params.append("state", state);
-
   localStorage.setItem("authorization_state", state);
-
-  const url = "https://accounts.spotify.com/authorize?" + params.toString();
+  const url = generateURLWithSearchParams(
+    "https://accounts.spotify.com/authorize",
+    {
+      client_id: CLIENT_ID,
+      scope: "user-read-currently-playing",
+      show_dialog: "true",
+      redirect_uri: REDIRECT_URI,
+      response_type: "token",
+      state: state,
+    }
+  );
   window.open(url, "_self");
 }

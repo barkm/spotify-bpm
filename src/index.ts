@@ -1,20 +1,17 @@
 import "./style.css";
 import { authorize, getAccesTokenFromURL } from "./authorization";
+import { generateURLWithSearchParams } from "./url";
 
 async function makeSpotifyApiRequest(
   endpoint: string,
   method: "GET" | "POST",
   access_token: string,
-  query_params: { [index: string]: string } | null = null
+  search_params: { [index: string]: string } = {}
 ): Promise<any> {
-  let url = "https://api.spotify.com/v1/" + endpoint;
-  if (query_params) {
-    const search_params = new URLSearchParams();
-    for (const [key, value] of Object.entries(query_params)) {
-      search_params.append(key, value);
-    }
-    url += "?" + search_params.toString();
-  }
+  const url = generateURLWithSearchParams(
+    "https://api.spotify.com/v1/" + endpoint,
+    search_params
+  );
   const response = await fetch(url, {
     method: method,
     headers: {
