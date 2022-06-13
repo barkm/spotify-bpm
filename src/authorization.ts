@@ -89,7 +89,7 @@ export function authorize(): Promise<string | null> | null {
   }
   const authorization_code = getAuthorizationCodeFromURL();
   if (authorization_code) {
-    window.history.replaceState({}, document.title, "/");
+    history.replaceState({}, document.title, location.pathname);
     return requestAccessToken(authorization_code).then((access_token) => {
       if (!access_token) {
         return null;
