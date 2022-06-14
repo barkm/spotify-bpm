@@ -78,12 +78,17 @@ function updateHTML(track: Track | null): void {
   }
 }
 
+function signOut() {
+  localStorage.clear();
+  location.reload();
+}
+
 function update(access_token: string): void {
   getCurrentlyPlayingTrack(access_token)
     .then(updateHTML)
     .catch((error: Error) => {
       if (error.message == "401") {
-        authorize();
+        signOut();
         return;
       }
       throw error;
@@ -102,15 +107,12 @@ function startIntervalWithPause(func: () => any, time_ms: number): void {
   });
 }
 
-function signOut() {
-  localStorage.clear();
-  location.reload();
-}
-
 function main() {
   authorize()?.then((access_token) => {
     if (access_token) {
       startIntervalWithPause(() => update(access_token), 1000);
+    } else {
+      signOut();
     }
   });
   document.getElementById("sign-out")!.onclick = signOut;
